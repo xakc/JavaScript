@@ -1,16 +1,20 @@
 const express = require('express');
-
+const path = require('path');
+const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
+const routing = require('./routing');
+const port = 3000;
 const app = express();
 
-app.get('/', function(req,res){
-    res.send('Hello WebSites world!')
-});
+app.engine(".hbs", handlebars({
+  extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, '/views'));
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+routing(app);
 
-app.get('/apply', function(req,res){
-
-    res.send("Hello here, tell me about it!")
-
-    }
-)
-
-app.listen(3000,()=>console.log('Listening ...... ;) ..... :) ..... :|'));
+app.listen(port, console.log("Listening on port " + port + "..."));
