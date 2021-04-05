@@ -20,7 +20,7 @@ function solve() {
               document.querySelectorAll('tbody')[0].insertAdjacentHTML('beforeEnd',htmlString);
 
           })
-
+			//needs to be rethinked in order to find a better solution
           input.value='';
     });
 
